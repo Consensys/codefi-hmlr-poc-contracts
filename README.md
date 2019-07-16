@@ -1,10 +1,6 @@
-# Meridio Contracts
+# CodeFi-HMLR PoC Contracts
 
-[ConsenSys Diligence Audit Report from October 5, 2018](https://github.com/MeridioRE/meridio-report)
-
-This repo represents the contracts that make up the Meridio Asset Token ecosystem.
-
-For more information about Meridio, visit [Meridio.co](https://meridio.co)
+This repo represents the contracts that were used in the CodeFi-HMLR PoC.
 
 ## Setup
 
@@ -33,10 +29,6 @@ Environment Variables:
 #### [`FakeDai`](contracts/mocks/FakeDai.sol)
 
 This is a copy of the Dai contract that Meridio uses in its test environments to mock interactions with Mainnet Dai.
-
-#### [`Exchange`](contracts/third-party/Exchange.sol)
-
-This is a copy of the Airswap Exchange contract that Meridio uses for P2P swaps between AssetTokens and Dai.
 
 ### Token
 
@@ -90,89 +82,6 @@ _Note: Imports `OwnedUpgradeabilityProxy.sol` as `ProxyToken`_
 
 ### Modules
 
-#### [`BlacklistValidator`](/contracts/modules/BlacklistValidator.sol)
-
-This TransferValidator contract reverts transfers if the `to` address is `true` in the blacklist mapping.
-
-**Permissions:**
-
-The `owner` of the contract can add/remove addresses from the blacklist.
-
-**Inheritance Chain:**
-
-1. [`TransferValidator`](contracts/inheritables/TransferValidator.sol)
-2. [`IModuleContract`](contracts/interfaces/IModuleContract)
-3. [`openzeppelin/Pausable`](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v1.12.0/contracts/lifecycle/Pausable.sol)
-
-#### [`InvestorCapValidator`](/contracts/modules/InvestorCapValidator.sol)
-
-This TransferValidator contract reverts transfers if the transfer would cause there to be too many investors. `InvestorCount` and `InvestorCap`  are tracked as state on this contract. There is one `InvestorCount` per `msg.sender` that interacts with this contract and a single `InvestorCap`. (In the case of a token transfer `msg.sender` is the token contract.)
-
-**Logic:**
-
-If `to` has a balance of 0 and `from` will not have a balance of 0 after the trade then increase `investorCount` for `msg.sender`.
-If `from` will have a balance of 0 and `to` already has a balance of token, then decrease `investorCount` for `msg.sender`.
-Report `false` if a trade would cause `investorCount` to be greater than `investorCap`.
-
-**Permissions:**
-
-The `owner` of the contract can manually update the `investorCount` for any address and can set the `InvestorCap`.
-
-**Inheritance Chain:**
-
-1. [`TransferValidator`](contracts/inheritables/TransferValidator.s)
-2. [`IModuleContract`](contracts/interfaces/IModuleContract)
-3. [`openzeppelin/Pausable`](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v1.12.0/contracts/lifecycle/Pausable.sol)
-
-
-#### [`InvestorMinValidator`](/contracts/modules/InvestorMinValidator.sol)
-
-This TransferValidator contract reverts transfers if the transfer would cause there to be too few investors. `InvestorCount` and `InvestorMin`  are tracked as state on this contract. There is one `InvestorCount` per `msg.sender` that interacts with this contract and a single `InvestorMin`. (In the case of a token transfer `msg.sender` is the token contract.)
-
-**Logic:**
-
-If `to` has a balance of 0 and `from` will not have a balance of 0 after the trade then increase `investorCount` for `msg.sender`.
-If `from` will have a balance of 0 and `to` already has a balance of token, then decrease `investorCount` for `msg.sender`.
-Report `false` if a trade would cause `investorCount` to be less than `investorMin`.
-
-**Permissions:**
-
-The `owner` of the contract can manually update the `investorCount` for any address and can set the `InvestorMin`.
-
-**Inheritance Chain:**
-
-1. [`TransferValidator`](contracts/inheritables/TransferValidator.s)
-2. [`IModuleContract`](contracts/interfaces/IModuleContract)
-3. [`openzeppelin/Pausable`](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v1.12.0/contracts/lifecycle/Pausable.sol)
-
-#### [`LockUpPeriodValidator`](/contracts/modules/LockUpPeriodValidator.sol)
-
-This TransferValidator contract reverts transfers if the transfer would occur before the specified `openingTime` (compared against `block.timestamp`).
-
-**Permissions:**
-
-The `owner` of the contract can manually update the `openingTime`.
-
-**Inheritance Chain:**
-
-1. [`TransferValidator`](contracts/inheritables/TransferValidator.s)
-2. [`IModuleContract`](contracts/interfaces/IModuleContract)
-3. [`openzeppelin/Pausable`](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v1.12.0/contracts/lifecycle/Pausable.sol)
-
-#### [`MaxAmountValidator`](/contracts/modules/MaxAmountValidator.sol)
-
-This TransferValidator contract reverts transfers if the transfer would increase the `to` address's `balance` above a `maxAmount`.
-
-**Permissions:**
-
-The `owner` of the contract can manually update the `maxAmount`.
-
-**Inheritance Chain:**
-
-1. [`TransferValidator`](contracts/inheritables/TransferValidator.s)
-2. [`IModuleContract`](contracts/interfaces/IModuleContract)
-3. [`openzeppelin/Pausable`](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v1.12.0/contracts/lifecycle/Pausable.sol)
-
 #### [`PausableValidator`](/contracts/modules/PausableValidator.sol)
 
 This TransferValidator contract reverts transfers if the validator is paused.
@@ -180,34 +89,6 @@ This TransferValidator contract reverts transfers if the validator is paused.
 **Permissions:**
 
 The `owner` of the contract can pause/unpause the contract.
-
-**Inheritance Chain:**
-
-1. [`TransferValidator`](contracts/inheritables/TransferValidator.s)
-2. [`IModuleContract`](contracts/interfaces/IModuleContract)
-3. [`openzeppelin/Pausable`](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v1.12.0/contracts/lifecycle/Pausable.sol)
-
-#### [`SenderBlacklistValidator`](/contracts/modules/SenderBlacklistValidator.sol)
-
-This TransferValidator contract reverts transfers if the `from` address is `true` in the blacklist mapping.
-
-**Permissions:**
-
-The `owner` of the contract can add/remove addresses from the blacklist.
-
-**Inheritance Chain:**
-
-1. [`TransferValidator`](contracts/inheritables/TransferValidator.s)
-2. [`IModuleContract`](contracts/interfaces/IModuleContract)
-3. [`openzeppelin/Pausable`](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v1.12.0/contracts/lifecycle/Pausable.sol)
-
-#### [`SenderWhitelistValidator`](/contracts/modules/SenderWhitelistValidator.sol)
-
-This TransferValidator contract reverts transfers if the `from` address is `false` in the whitelist mapping.
-
-**Permissions:**
-
-The `owner` of the contract can add/remove addresses from the whitelist.
 
 **Inheritance Chain:**
 
@@ -231,21 +112,6 @@ The `owner` of the contract can add/remove addresses from the whitelist.
 
 
 ### Other
-
-#### [`DistributionIssuer`](contracts/DistributionIssuer.sol)
-
-This is a singleton contract that allows anyone to send many ERC20 compliant token transfers of various amounts to various payees. The sender must have approved the contract to `transferFrom` on its behalf beforehand.
-
-#### [`MeridioCrowdsale`](contracts/MeridioCrowdsale.sol)
-
-This is a crowdsale contract based on openzeppelin contracts. It allows for the purchasing of AssetTokens with ETH via `transferFrom` function. It has a conversion `rate` and `openingTime`/`closingTime`. The Owner can update the Rate as needed to adjust for price fluxuations in ETH.
-
-**Inheritance Chain:**
-
-1. [`openzeppelin/AllowanceCrowdsale`](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v1.12.0/contracts/crowdsale/emission/AllowanceCrowdsale.sol)
-2. [`openzeppelin/TimedCrowdsale`](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v1.12.0/contracts/crowdsale/validation/TimedCrowdsale.sol)
-3. [`openzeppelin/TokenDestructible`](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v1.12.0/contracts/lifecycle/TokenDestructible.sol)
-4. [`openzeppelin/Pausable`](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v1.12.0/contracts/lifecycle/Pausable.sol)
 
 #### [`SimpleLinkRegistry`](contracts/SimpleLinkRegistry.sol)
 
