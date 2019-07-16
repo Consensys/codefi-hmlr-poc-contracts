@@ -1,0 +1,37 @@
+File                           |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+-------------------------------|----------|----------|----------|----------|----------------|
+ contracts/                    |      100 |    96.15 |      100 |      100 |                |
+  AssetToken.sol               |      100 |       95 |      100 |      100 |                |
+  DistributionIssuer.sol       |      100 |      100 |      100 |      100 |                |
+  MeridioCrowdsale.sol         |      100 |      100 |      100 |      100 |                |
+  SimpleLinkRegistry.sol       |      100 |      100 |      100 |      100 |                |
+ contracts/factories/          |      100 |      100 |      100 |      100 |                |
+  ProxyTokenFactory.sol        |      100 |      100 |      100 |      100 |                |
+ contracts/inheritables/       |      100 |      100 |      100 |      100 |                |
+  MetadataStore.sol            |      100 |      100 |      100 |      100 |                |
+  Moduleable.sol               |      100 |      100 |      100 |      100 |                |
+  TransferValidator.sol        |      100 |      100 |      100 |      100 |                |
+ contracts/interfaces/         |      100 |      100 |      100 |      100 |                |
+  IAssetTokenInitializer.sol   |      100 |      100 |      100 |      100 |                |
+  IERC20.sol                   |      100 |      100 |      100 |      100 |                |
+  IMetadataStore.sol           |      100 |      100 |      100 |      100 |                |
+  IModuleContract.sol          |      100 |      100 |      100 |      100 |                |
+  ITransferValidator.sol       |      100 |      100 |      100 |      100 |                |
+ contracts/modules/            |      100 |      100 |      100 |      100 |                |
+  BlacklistValidator.sol       |      100 |      100 |      100 |      100 |                |
+  InvestorCapValidator.sol     |      100 |      100 |      100 |      100 |                |
+  InvestorMinValidator.sol     |      100 |      100 |      100 |      100 |                |
+  LockUpPeriodValidator.sol    |      100 |      100 |      100 |      100 |                |
+  MaxAmountValidator.sol       |      100 |      100 |      100 |      100 |                |
+  PausableValidator.sol        |      100 |      100 |      100 |      100 |                |
+  SenderBlacklistValidator.sol |      100 |      100 |      100 |      100 |                |
+  SenderWhitelistValidator.sol |      100 |      100 |      100 |      100 |                |
+  WhitelistValidator.sol       |      100 |      100 |      100 |      100 |                |
+ contracts/proxy/              |      100 |       75 |      100 |      100 |                |
+  ERCProxy.sol                 |      100 |      100 |      100 |      100 |                |
+  OwnedUpgradeabilityProxy.sol |      100 |    66.67 |      100 |      100 |                |
+  Proxy.sol                    |      100 |       75 |      100 |      100 |                |
+  UpgradeabilityProxy.sol      |      100 |      100 |      100 |      100 |                |
+-------------------------------|----------|----------|----------|----------|----------------|
+All files                       |      100 |    97.12 |      100 |      100 |                |
+-------------------------------|----------|----------|----------|----------|----------------|

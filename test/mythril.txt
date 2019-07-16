@@ -1,0 +1,690 @@
+# Analysis result for SimpleLinkRegistry:
+
+==== Integer Overflow  ====
+Type: Warning
+Contract: Unknown
+Function name: _function_0x4888634c
+PC address: 407
+A possible integer overflow exists in the function `_function_0x4888634c`.
+The addition or multiplication may result in a value higher than the maximum representable integer.
+--------------------
+In file: SimpleLinkRegistry.json:30
+
+function setLink(
+        address subject,
+        bytes32 key,
+        string value
+    )
+        public
+        onlyOwner
+    {
+        registry[subject][key] = value;
+        emit LinkSet(
+            msg.sender,
+            subject,
+            key,
+            value,
+            block.timestamp // solhint-disable-line not-rely-on-time
+        );
+    }
+
+--------------------
+
+==== Integer Overflow  ====
+Type: Warning
+Contract: Unknown
+Function name: _function_0x4888634c
+PC address: 2462
+A possible integer overflow exists in the function `_function_0x4888634c`.
+The addition or multiplication may result in a value higher than the maximum representable integer.
+--------------------
+In file: SimpleLinkRegistry.json:8
+
+contract SimpleLinkRegistry is Ownable {
+    /*----------- Variables -----------*/
+    mapping(
+        address => mapping(
+            bytes32 => string
+        )
+    ) public registry;
+
+    event LinkSet(
+        address from,
+        address indexed subject,
+        bytes32 indexed key,
+        string value,
+        uint updatedAt
+    );
+
+    /**
+    * @dev Create or update a link
+    * @param subject - The address the link is being issued to
+    * @param key - The key used to identify the link
+    * @param value - The data associated with the link
+    */
+    function setLink(
+        address subject,
+        bytes32 key,
+        string value
+    )
+        public
+        onlyOwner
+    {
+        registry[subject][key] = value;
+        emit LinkSet(
+            msg.sender,
+            subject,
+            key,
+            value,
+            block.timestamp // solhint-disable-line not-rely-on-time
+        );
+    }
+
+    /**
+    * @dev Allows a user to retrieve a link
+    * @param subject - The address to which the link was issued to
+    * @param key - The key used to identify the link
+    */
+    function getLink(
+        address subject,
+        bytes32 key
+    )
+        public
+        view
+        returns(string)
+    {
+        return registry[subject][key];
+    }
+}
+
+--------------------
+
+==== Integer Overflow  ====
+Type: Warning
+Contract: Unknown
+Function name: _function_0x4888634c
+PC address: 2476
+A possible integer overflow exists in the function `_function_0x4888634c`.
+The addition or multiplication may result in a value higher than the maximum representable integer.
+--------------------
+In file: SimpleLinkRegistry.json:8
+
+contract SimpleLinkRegistry is Ownable {
+    /*----------- Variables -----------*/
+    mapping(
+        address => mapping(
+            bytes32 => string
+        )
+    ) public registry;
+
+    event LinkSet(
+        address from,
+        address indexed subject,
+        bytes32 indexed key,
+        string value,
+        uint updatedAt
+    );
+
+    /**
+    * @dev Create or update a link
+    * @param subject - The address the link is being issued to
+    * @param key - The key used to identify the link
+    * @param value - The data associated with the link
+    */
+    function setLink(
+        address subject,
+        bytes32 key,
+        string value
+    )
+        public
+        onlyOwner
+    {
+        registry[subject][key] = value;
+        emit LinkSet(
+            msg.sender,
+            subject,
+            key,
+            value,
+            block.timestamp // solhint-disable-line not-rely-on-time
+        );
+    }
+
+    /**
+    * @dev Allows a user to retrieve a link
+    * @param subject - The address to which the link was issued to
+    * @param key - The key used to identify the link
+    */
+    function getLink(
+        address subject,
+        bytes32 key
+    )
+        public
+        view
+        returns(string)
+    {
+        return registry[subject][key];
+    }
+}
+
+--------------------
+
+
+# Analysis result for Exchange:
+
+==== Unchecked CALL return value ====
+Type: Informational
+Contract: Unknown
+Function name: _function_0x66a26419
+PC address: 4429
+The return value of an external call is not checked. Note that execution continue even if the called contract throws.
+--------------------
+In file: Exchange.json:209
+
+ecrecover(prefixedHash, v, r, s)
+
+--------------------
+
+
+# Analysis result for VersionableAssetTokenMock:
+
+==== Message call to external contract ====
+Type: Warning
+Contract: Unknown
+Function name: addModule(address)
+PC address: 5292
+This contract executes a message call to an address provided as a function argument. Generally, it is not recommended to call user-supplied addresses using Solidity's call() construct. Note that attackers might leverage reentrancy attacks to exploit race conditions or manipulate this contract's state.
+--------------------
+In file: VersionableAssetTokenMock.json:22
+
+
+# Analysis result for ERC20Events
+
+No issues found.
+# Analysis result for DSAuth:
+
+==== Message call to external contract ====
+Type: Informational
+Contract: Unknown
+Function name: _function_0x7a9e5e4b
+PC address: 1502
+This contract executes a message call to to another contract. Make sure that the called contract is trusted and does not execute user-supplied code.
+--------------------
+In file: DSAuth.json:156
+
+authority.canCall(src, this, sig)
+
+--------------------
+
+==== Transaction order dependence ====
+Type: Warning
+Contract: Unknown
+Function name: _function_0x7a9e5e4b
+PC address: 1502
+A possible transaction order independence vulnerability exists in function _function_0x7a9e5e4b. The value or direction of the call statement is determined from a tainted storage location
+--------------------
+In file: DSAuth.json:156
+
+authority.canCall(src, this, sig)
+
+--------------------
+
+
+# Analysis result for AssetToken:
+
+==== Message call to external contract ====
+Type: Warning
+Contract: Unknown
+Function name: addModule(address)
+PC address: 5176
+This contract executes a message call to an address provided as a function argument. Generally, it is not recommended to call user-supplied addresses using Solidity's call() construct. Note that attackers might leverage reentrancy attacks to exploit race conditions or manipulate this contract's state.
+--------------------
+In file: AssetToken.json:51
+
+        require(!_initia
+
+--------------------
+
+
+# Analysis result for OwnedUpgradeabilityProxy:
+
+==== Call data forwarded with delegatecall() ====
+Type: Informational
+Contract: Unknown
+Function name: fallback
+PC address: 208
+This contract forwards its call data via DELEGATECALL in its fallback function. This means that any function in the called contract can be executed. Note that the callee contract will have access to the storage of the calling contract.
+ DELEGATECALL target: storage_47140728831188738539040354952384111346607686013266077149366187661720267207576
+--------------------
+In file: OwnedUpgradeabilityProxy.json:37
+
+e proxy Owner");
+        _;
+    }
+
+    /**
+    *
+
+--------------------
+
+==== DELEGATECALL to a user-supplied address ====
+Type: Informational
+Contract: Unknown
+Function name: fallback
+PC address: 208
+Be aware that the called contract gets unrestricted access to this contract's state.
+--------------------
+In file: OwnedUpgradeabilityProxy.json:37
+
+e proxy Owner");
+        _;
+    }
+
+    /**
+    *
+
+--------------------
+
+
+# Analysis result for OverflowModuleMock
+
+No issues found.
+# Analysis result for DSStop:
+
+==== Message call to external contract ====
+Type: Informational
+Contract: Unknown
+Function name: _function_0x13af4035
+PC address: 2164
+This contract executes a message call to to another contract. Make sure that the called contract is trusted and does not execute user-supplied code.
+--------------------
+In file: DSStop.json:156
+
+authority.canCall(src, this, sig)
+
+--------------------
+
+
+# Analysis result for UpgradeabilityProxy:
+
+==== Call data forwarded with delegatecall() ====
+Type: Informational
+Contract: Unknown
+Function name: fallback
+PC address: 164
+This contract forwards its call data via DELEGATECALL in its fallback function. This means that any function in the called contract can be executed. Note that the callee contract will have access to the storage of the calling contract.
+ DELEGATECALL target: storage_47140728831188738539040354952384111346607686013266077149366187661720267207576
+--------------------
+In file: UpgradeabilityProxy.json:50
+
+  */
+    function _upgradeTo(address newImplement
+
+--------------------
+
+==== DELEGATECALL to a user-supplied address ====
+Type: Informational
+Contract: Unknown
+Function name: fallback
+PC address: 164
+Be aware that the called contract gets unrestricted access to this contract's state.
+--------------------
+In file: UpgradeabilityProxy.json:50
+
+  */
+    function _upgradeTo(address newImplement
+
+--------------------
+
+
+# Analysis result for Moduleable:
+
+==== Message call to external contract ====
+Type: Warning
+Contract: Unknown
+Function name: addModule(address)
+PC address: 2639
+This contract executes a message call to an address provided as a function argument. Generally, it is not recommended to call user-supplied addresses using Solidity's call() construct. Note that attackers might leverage reentrancy attacks to exploit race conditions or manipulate this contract's state.
+--------------------
+In file: Moduleable.json:47
+
+moduleContract.getType()
+
+--------------------
+
+==== Multiple Calls ====
+Type: Information
+Contract: Unknown
+Function name: addModule(address)
+PC address: 2639
+Multiple sends exist in one transaction, try to isolate each external call into its own transaction. As external calls can fail accidentally or deliberately.
+Consecutive calls:
+Call at address: 2800
+
+--------------------
+In file: Moduleable.json:47
+
+moduleContract.getType()
+
+--------------------
+
+==== Message call to external contract ====
+Type: Warning
+Contract: Unknown
+Function name: addModule(address)
+PC address: 2800
+This contract executes a message call to an address provided as a function argument. Generally, it is not recommended to call user-supplied addresses using Solidity's call() construct. Note that attackers might leverage reentrancy attacks to exploit race conditions or manipulate this contract's state.
+--------------------
+In file: Moduleable.json:49
+
+moduleContract.getName()
+
+--------------------
+
+==== Exception state ====
+Type: Informational
+Contract: Unknown
+Function name: _function_0x729d20e2
+PC address: 3720
+A reachable exception (opcode 0xfe) has been detected. This can be caused by type errors, division by zero, out-of-bounds array access, or assert violations. This is acceptable in most situations. Note however that `assert()` should only be used to check invariants. Use `require()` for regular input checking.
+--------------------
+In file: Moduleable.json:12
+
+mapping (uint8 => address[]) public modules
+
+--------------------
+
+
+# Analysis result for TokenB:
+
+==== Exception state ====
+Type: Informational
+Contract: Unknown
+Function name: _function_0x0ecaea73
+PC address: 1579
+A reachable exception (opcode 0xfe) has been detected. This can be caused by type errors, division by zero, out-of-bounds array access, or assert violations. This is acceptable in most situations. Note however that `assert()` should only be used to check invariants. Use `require()` for regular input checking.
+--------------------
+In file: TokenB.json:14
+
+assert(msg.sender == minter)
+
+--------------------
+
+==== Integer Overflow  ====
+Type: Warning
+Contract: Unknown
+Function name: _function_0x0ecaea73
+PC address: 3628
+A possible integer overflow exists in the function `_function_0x0ecaea73`.
+The addition or multiplication may result in a value higher than the maximum representable integer.
+--------------------
+In file: TokenB.json:25
+
+==== Exception state ====
+Type: Informational
+Contract: Unknown
+Function name: _function_0x0ecaea73
+PC address: 3641
+A reachable exception (opcode 0xfe) has been detected. This can be caused by type errors, division by zero, out-of-bounds array access, or assert violations. This is acceptable in most situations. Note however that `assert()` should only be used to check invariants. Use `require()` for regular input checking.
+--------------------
+In file: TokenB.json:25
+
+
+# Analysis result for SafeMath
+
+No issues found.
+# Analysis result for ImplementationMock_v2
+
+No issues found.
+# Analysis result for Whitelist
+
+No issues found.
+# Analysis result for WhitelistValidator
+
+No issues found.
+# Analysis result for DSAuthEvents
+
+No issues found.
+# Analysis result for SimpleToken
+
+No issues found.
+# Analysis result for ProxyTypeMock
+
+No issues found.
+# Analysis result for BasicToken
+
+No issues found.
+# Analysis result for PausableValidator
+
+No issues found.
+# Analysis result for AssetTokenV2
+
+No issues found.
+# Analysis result for ProxyImplMock:
+
+==== Call data forwarded with delegatecall() ====
+Type: Informational
+Contract: Unknown
+Function name: fallback
+PC address: 164
+This contract forwards its call data via DELEGATECALL in its fallback function. This means that any function in the called contract can be executed. Note that the callee contract will have access to the storage of the calling contract.
+ DELEGATECALL target: storage_47140728831188738539040354952384111346607686013266077149366187661720267207576
+--------------------
+In file: ProxyImplMock.json:31
+
+==== DELEGATECALL to a user-supplied address ====
+Type: Informational
+Contract: Unknown
+Function name: fallback
+PC address: 164
+Be aware that the called contract gets unrestricted access to this contract's state.
+--------------------
+In file: ProxyImplMock.json:31
+
+
+# Analysis result for DistributionIssuer:
+
+==== Integer Overflow  ====
+Type: Warning
+Contract: Unknown
+Function name: _function_0x462184b3
+PC address: 147
+A possible integer overflow exists in the function `_function_0x462184b3`.
+The addition or multiplication may result in a value higher than the maximum representable integer.
+--------------------
+In file: DistributionIssuer.json:27
+
+function pushDistributionsToAddresses(
+        address _tokenAddress,
+        address[] _payees,
+        uint256[] _tokenAmounts
+    ) public {
+        require(_payees.length < MAX_PAYEES_LENGTH, "Number of payees must be less than MAX_PAYEES_LENGTH");
+        require(_payees.length == _tokenAmounts.length, "Payee and token amount arrays must be the same length");
+        for (uint256 i = 0; i < _payees.length; i++) {
+            _issueDistribution(_tokenAddress, msg.sender, _payees[i], _tokenAmounts[i]);
+        }
+    }
+
+--------------------
+
+
+# Analysis result for StandardToken
+
+No issues found.
+# Analysis result for ImplementationMock_v0
+
+No issues found.
+# Analysis result for DSTokenBase:
+
+==== Integer Underflow ====
+Type: Warning
+Contract: Unknown
+Function name: _function_0x23b872dd
+PC address: 1905
+A possible integer underflow exists in the function `_function_0x23b872dd`.
+The subtraction may result in a value < 0.
+--------------------
+In file: DSTokenBase.json:28
+
+x - y
+
+--------------------
+
+
+# Analysis result for ImplementationMock_v1
+
+No issues found.
+# Analysis result for Pausable
+
+No issues found.
+# Analysis result for DSNote
+
+No issues found.
+# Analysis result for TokenA:
+
+==== Exception state ====
+Type: Informational
+Contract: Unknown
+Function name: _function_0x0ecaea73
+PC address: 1579
+A reachable exception (opcode 0xfe) has been detected. This can be caused by type errors, division by zero, out-of-bounds array access, or assert violations. This is acceptable in most situations. Note however that `assert()` should only be used to check invariants. Use `require()` for regular input checking.
+--------------------
+In file: TokenA.json:14
+
+assert(msg.sender == minter)
+
+--------------------
+
+==== Integer Overflow  ====
+Type: Warning
+Contract: Unknown
+Function name: _function_0x0ecaea73
+PC address: 3628
+A possible integer overflow exists in the function `_function_0x0ecaea73`.
+The addition or multiplication may result in a value higher than the maximum representable integer.
+--------------------
+In file: TokenA.json:25
+
+==== Exception state ====
+Type: Informational
+Contract: Unknown
+Function name: _function_0x0ecaea73
+PC address: 3641
+A reachable exception (opcode 0xfe) has been detected. This can be caused by type errors, division by zero, out-of-bounds array access, or assert violations. This is acceptable in most situations. Note however that `assert()` should only be used to check invariants. Use `require()` for regular input checking.
+--------------------
+In file: TokenA.json:25
+
+
+# Analysis result for UpgradeabilityProxyMock:
+
+==== Call data forwarded with delegatecall() ====
+Type: Informational
+Contract: Unknown
+Function name: fallback
+PC address: 186
+This contract forwards its call data via DELEGATECALL in its fallback function. This means that any function in the called contract can be executed. Note that the callee contract will have access to the storage of the calling contract.
+ DELEGATECALL target: storage_47140728831188738539040354952384111346607686013266077149366187661720267207576
+--------------------
+In file: UpgradeabilityProxyMock.json:51
+
+
+    function upgradeTo(address implementation) p
+
+--------------------
+
+==== DELEGATECALL to a user-supplied address ====
+Type: Informational
+Contract: Unknown
+Function name: fallback
+PC address: 186
+This contract delegates execution to a contract address in storage slot 47140728831188738539040354952384111346607686013266077149366187661720267207576. This storage slot can be written to by calling the function `_function_0x3659cfe6`. Be aware that the called contract gets unrestricted access to this contract's state.
+--------------------
+In file: UpgradeabilityProxyMock.json:51
+
+
+    function upgradeTo(address implementation) p
+
+--------------------
+
+==== Transaction order dependence ====
+Type: Warning
+Contract: Unknown
+Function name: fallback
+PC address: 186
+A possible transaction order independence vulnerability exists in function fallback. The value or direction of the call statement is determined from a tainted storage location
+--------------------
+In file: UpgradeabilityProxyMock.json:51
+
+
+    function upgradeTo(address implementation) p
+
+--------------------
+
+
+# Analysis result for Ownable
+
+No issues found.
+# Analysis result for TokenDestructible:
+
+==== Integer Overflow  ====
+Type: Warning
+Contract: Unknown
+Function name: _function_0xc6786e5a
+PC address: 247
+A possible integer overflow exists in the function `_function_0xc6786e5a`.
+The addition or multiplication may result in a value higher than the maximum representable integer.
+--------------------
+In file: TokenDestructible.json:24
+
+unction destroy(address[] tokens) onlyOwner public {
+
+    // Transfer tokens to owner
+    for (uint256 i = 0; i < tokens.length; i++) {
+      ERC20Basic token = ERC20Basic(tokens[i]);
+      uint256 balance = token.balanceOf(this);
+      token.transfer(owner, balance);
+    }
+
+    // Transfer Eth to owner and terminate contract
+    selfdestruct(owner);
+  }
+
+
+--------------------
+
+==== Message call to external contract ====
+Type: Warning
+Contract: Unknown
+Function name: _function_0xc6786e5a
+PC address: 971
+This contract executes a message call to an address provided as a function argument. Generally, it is not recommended to call user-supplied addresses using Solidity's call() construct. Note that attackers might leverage reentrancy attacks to exploit race conditions or manipulate this contract's state.
+--------------------
+In file: TokenDestructible.json:29
+
+oken.balanceOf(this);
+
+--------------------
+
+
+# Analysis result for DSToken:
+
+==== Message call to external contract ====
+Type: Informational
+Contract: Unknown
+Function name: _function_0x07da68f5
+PC address: 6313
+This contract executes a message call to to another contract. Make sure that the called contract is trusted and does not execute user-supplied code.
+--------------------
+In file: DSToken.json:156
+
+authority.canCall(src, this, sig)
+
+--------------------
+
+
+# Analysis result for Whitelist_v0_2
+
+No issues found.
+# Analysis result for DSMath
+
+No issues found.
